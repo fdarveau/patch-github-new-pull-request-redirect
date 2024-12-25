@@ -2,14 +2,14 @@
 // @name         GitHub Restore Default Pull Request Redirect
 // @namespace    http://tampermonkey.net/
 // @version      5.0
-// @description  Redirect the "New pull request" button on GitHub to a create a Pull Request against the main branch of this repo, and _not_ the upstream repo
+// @description  Redirect the "New pull request" button on GitHub to a create a Pull Request against the master branch of this repo, and _not_ the upstream repo
 // @author       Marlen
 // @match        https://github.com/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=github.com
+// @icon         https://www.google.com/s2/favicons?sz=64&domaster=github.com
 // @grant        none
 // @run-at       document-body
-// @updateURL    https://raw.githubusercontent.com/klondikemarlen/patch-github-new-pull-request-redirect/main/main.js
-// @downloadURL  https://raw.githubusercontent.com/klondikemarlen/patch-github-new-pull-request-redirect/main/main.js
+// @updateURL    https://raw.githubusercontent.com/klondikemarlen/patch-github-new-pull-request-redirect/master/master.js
+// @downloadURL  https://raw.githubusercontent.com/klondikemarlen/patch-github-new-pull-request-redirect/master/master.js
 // ==/UserScript==
 
 ;(function () {
@@ -46,12 +46,12 @@
             const [_repoPath, branchName] = urlPart.split("/compare/", 7)
 
             // Adjust the button's href for the specific branch
-            // e.g. https://github.com/icefoganalytics/travel-authorization/compare/main...icefoganalytics:travel-authorization:issue-119/implement-correcting-lines-for-non-travel-status-days-on-estimate-tab?expand=1
-            newPullRequestButton.href = `/${repoOwner}/${repoName}/compare/main...${repoOwner}:${repoName}:${branchName}?${queryParams}`
+            // e.g. https://github.com/icefoganalytics/travel-authorization/compare/master...icefoganalytics:travel-authorization:issue-119/implement-correcting-lines-for-non-travel-status-days-on-estimate-tab?expand=1
+            newPullRequestButton.href = `/${repoOwner}/${repoName}/compare/master...${repoOwner}:${repoName}:${branchName}?${queryParams}`
         } else {
-            // Default behavior for the main branch
-            // e.g. /icefoganalytics/travel-authorization/compare/main...icefoganalytics:travel-authorization:main
-            newPullRequestButton.href = `/${repoOwner}/${repoName}/compare/main...${repoOwner}:${repoName}:main`
+            // Default behavior for the master branch
+            // e.g. /icefoganalytics/travel-authorization/compare/master...icefoganalytics:travel-authorization:master
+            newPullRequestButton.href = `/${repoOwner}/${repoName}/compare/master...${repoOwner}:${repoName}:master`
         }
         // console.log("newPullRequestButton.href", newPullRequestButton.href)
     }
